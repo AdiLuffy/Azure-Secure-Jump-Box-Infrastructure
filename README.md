@@ -18,7 +18,9 @@ This project provisions a small Azure lab environment with:
 ## Files
 
 - `main.tf` — Terraform configuration for the infrastructure
+- `variables.tfvars.example` — example values for the required variables
 - `.gitignore` — ignores Terraform state and local cache files
+- `LICENSE` — project license
 - `Screenshots/` — screenshots of the lab setup and resources
 
 ## Prerequisites
@@ -44,13 +46,22 @@ You must provide values for the following variables when running Terraform:
 - `my_ip`
 - `admin_password`
 
-Example:
+A ready-to-copy example is available in [`variables.tfvars.example`](variables.tfvars.example).
+
+```hcl
+location = "centralindia"
+my_ip = "49.37.12.34"
+vm_size = "Standard_B2s"
+admin_username = "azureadmin"
+admin_password = "YourStrongPassword123!"
+```
+
+Example command:
 
 ```bash
+cp variables.tfvars.example terraform.tfvars
 terraform init
-terraform plan \
-  -var="my_ip=49.37.12.34" \
-  -var="admin_password=YourStrongPassword123!"
+terraform plan
 ```
 
 ## Deploy
@@ -85,6 +96,24 @@ After deployment, Terraform will print:
 - `my_ip` should be your actual public IP without a `/32` suffix.
 - `admin_password` must meet Azure password rules.
 - The configuration intentionally keeps `vm2` private to model a secure bastion/jump-box architecture.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Screenshots
+
+![Azure resource group and networking overview](Screenshots/1.png)
+Figure 1: Resource group and networking layout for the secure jump-box lab.
+
+![Subnet and VM configuration](Screenshots/2.png)
+Figure 2: Subnet segmentation for the public jump box and private Linux VM.
+
+![Security rule overview](Screenshots/3.png)
+Figure 3: NSG rule view showing restricted RDP and SSH access.
+
+![VM deployment summary](Screenshots/4.png)
+Figure 4: Summary of the Azure VM resources created by Terraform.
 
 ## Cleanup
 

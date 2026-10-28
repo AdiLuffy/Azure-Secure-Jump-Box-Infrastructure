@@ -1,0 +1,5 @@
+location = "centralindia"
+my_ip = "49.37.12.34"
+vm_size = "Standard_B2s"
+admin_username = "azureadmin"
+admin_password = "YourStrongPassword123!"
